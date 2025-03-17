@@ -44,8 +44,8 @@ nav a:hover {
 
 .page-container {
     display: flex;
-    background-color: #f8f8f8;
     justify-content: space-between;
+    background-color: #f8f8f8;
     margin: 0;
     padding: 0;
 }
@@ -74,7 +74,25 @@ nav a:hover {
     background-image: url("../assets/backPokemon.webp");
     background-size: cover;
     background-position: center;
+    box-shadow: 5px 5px 5px #acacac;
+    transition: box-shadow 0.3s ease;
+    cursor:pointer;
+
 }  
+
+.cardPokemon img {
+    height: 200px;
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+.cardPokemon:hover{
+    box-shadow: 5px 5px 5px #000000;
+}
+
+.cardPokemon :hover{
+    zoom: 1;
+}
 
 .cardMagic {
     display: flex;
@@ -87,7 +105,14 @@ nav a:hover {
     background-size: cover;
     background-position: center;
     color: #fff;
+    box-shadow: 5px 5px 5px #acacac;
+    transition: box-shadow 0.3s ease;
+    cursor:pointer;
 } 
+
+.cardMagic:hover{
+    box-shadow: 5px 5px 5px #000000;
+}
 
 .card img {
     margin-bottom: 10px;
