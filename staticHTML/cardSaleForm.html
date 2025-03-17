@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert New Card</title>
+    <link rel="stylesheet" href="css/mainPage.css">
+    <link rel="stylesheet" href="css/cardSaleForm.css">
+
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Logo" width="100" height="100">
+
+        <h1>POKEMON, MAGIC AND MUCH MORE!</h1>
+    </header>
+    <nav>
+        <a href="mainPage.html" >Home</a>
+        <a href="cardSaleForm.html" class="active">Vendi</a>
+    </nav>
+    
+    <div class="form-container">
+        <h2>Insert New Card</h2>
+        <form action="/submitCard" method="post">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="cardName">Card Name:</label>
+            <input type="text" id="cardName" name="cardName" required>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="date">Date of Insertion:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
