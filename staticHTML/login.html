@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Creation</title>
+    <link rel="stylesheet" href="./css/mainPage.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/checkLogin.js" defer></script>
+</head>
+<body>
+    <header>
+        <div>
+        <img src="assets/logo.png" alt="Logo" width="100" height="100">
+        <h1>POKEMON, MAGIC AND MUCH MORE!</h1>
+        </div>
+        <button>
+            <a href="login.html">LOGIN</a>
+        </button>
+    </header>
+
+    <nav>
+        <a href="mainPage.html">Home</a>
+        <a href="cardSaleForm.html">Sell</a>
+    </nav>
+    <div class="container">
+        <h2>Create User</h2>
+        <form id="userForm">
+
+            <label for="firstname">First Name:</label>
+            <div class="form-group">
+                <input type="text" id="firstname" name="firstname" required>
+                <span id="firstnameIndicator" class="indicator"></span>
+            </div>
+
+            <div id="firstnameError" class="error"></div>
+            <label for="lastname">Last Name:</label>
+            <div class="form-group">
+                <input type="text" id="lastname" name="lastname" required>
+                <span id="lastnameIndicator" class="indicator"></span>
+            </div>
+
+            <div id="lastnameError" class="error"></div>
+            <label for="username">Username:</label>
+            <div class="form-group">
+                <input type="text" id="username" name="username" required>
+                <span id="usernameIndicator" class="indicator"></span>
+            </div>
+
+            <div id="usernameError" class="error"></div>
+            <label for="password">Password:</label>
+            <div class="form-group">
+                <input type="password" id="password" name="password" required>
+                <span id="passwordIndicator" class="indicator"></span>
+            </div>
+            <div id="passwordError" class="error"></div>
+
+            <label for="passwordtwo">Password confirm:</label>
+            <div class="form-group">
+                <input type="password" id="passwordtwo" name="passwordtwo" required>
+                <span id="passwordtwoIndicator" class="indicator"></span>
+            </div>
+            <div id="passwordtwoError" class="error"></div>
+
+        </form>
+    </div>
+</body>
+</html>
