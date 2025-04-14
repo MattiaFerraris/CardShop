@@ -20,18 +20,18 @@ function validateFirstName() {
     if (!namesRegex.test(firstName)) {
         errorElement.textContent = 'First Name must contain only letters.';
         if (indicator) {
-            indicator.classList.add('error'); // Rosso per errore
+            indicator.classList.add('error');
         }
         isFirstNameValid = false;
     } else {
         errorElement.textContent = '';
         if (indicator) {
-            indicator.classList.add('success'); // Verde per successo
+            indicator.classList.add('success'); 
         }
         isFirstNameValid = true;
     }
 
-    bottonShow(); // Aggiorna lo stato del pulsante
+    bottonShow();
 }
 
 // Funzione per validare il cognome
@@ -47,18 +47,18 @@ function validateLastName() {
     if (!namesRegex.test(lastName)) {
         errorElement.textContent = 'Last Name must contain only letters.';
         if (indicator) {
-            indicator.classList.add('error'); // Rosso per errore
+            indicator.classList.add('error');
         }
         isLastNameValid = false;
     } else {
         errorElement.textContent = '';
         if (indicator) {
-            indicator.classList.add('success'); // Verde per successo
+            indicator.classList.add('success');
         }
         isLastNameValid = true;
     }
 
-    bottonShow(); // Aggiorna lo stato del pulsante
+    bottonShow();
 }
 
 // Funzione per validare lo username
@@ -159,6 +159,12 @@ function bottonShow() {
             submitButton.type = 'submit';
             submitButton.className = 'button Clickable';
             submitButton.textContent = 'Create Account';
+
+            submitButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                alert("Account creation in progress");
+            });
+
             form.appendChild(submitButton);
         }
     } else {

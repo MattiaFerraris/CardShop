@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>CARD STORE</title>
-        <link rel="stylesheet" href="./css/mainPage.css">
+        <link rel="stylesheet" href="/css/mainPage.css">
     </head>
     <body>
         <header>
             <div>
-            <img src="assets/logo.png" alt="Logo" width="100" height="100">
-            <h1>POKEMON, MAGIC AND MUCH MORE!</h1>
+            <img src="/assets/logo.png" alt="Logo" width="100" height="100">
+            <h1>POKÉMON, MAGIC AND MUCH MORE!</h1>
             </div>
             <button>
                 <a href="login.html">LOGIN</a>
@@ -17,8 +17,8 @@
         </header>
     
         <nav>
-            <a href="mainPage.html" class="active">Home</a>
-            <a href="cardSaleForm.html">Sell</a>
+            <a href="/" class="active">Home</a>
+            <a href="/card/new">Sell</a>
         </nav>
 
         <div class="page-container">
@@ -31,33 +31,38 @@
                 <section>
                     <h2>Pòkemon cards:</h2>
                     <div class="card-container">
+                        <ul id="card-list">
+                            <li th:each="card : ${cards}">
+                                <a th:href="@{/card/{id}(id=${card.id})}" th:text="${card.name}">Card Name</a>
+                            </li>
+                        </ul>
                         <article class="cardPokemon">
                             <div>
                                 <h2>Charizard Holo</h2>
                                 <p>Price: $100</p>
                             </div>
-                            <img src="assets/charizard.jpg" alt="Charizard" width="130" height="180">
+                            <img src="/assets/charizard.jpg" alt="Charizard" width="130" height="180">
                         </article>
                         <article class="cardPokemon" onclick="window.location.href='pokemonCard.html'">
                             <div>
                                 <h2>Pikachu EX</h2>
                                 <p>Price: $200</p>
                             </div>
-                        <img src="assets/pikachu.webp" alt="Pikachu" width="130" height="180">
+                        <img src="/assets/pikachu.webp" alt="Pikachu" width="130" height="180">
                         </article>
                         <article class="cardPokemon">
                             <div>
                                 <h2>Blastoise EX</h2>
                                 <p>Price: $200</p>
                             </div>
-                        <img src="assets/blastoise.png" alt="Blastoise" width="130" height="180">
+                        <img src="/assets/blastoise.png" alt="Blastoise" width="130" height="180">
                         </article>
                         <article class="cardPokemon">
                             <div>
                                 <h2>Ditto Vmax</h2>
                                 <p>Price: $53.5</p>
                             </div>
-                            <img src="assets/ditto.webp" alt="Ditto" width="130" height="180">
+                            <img src="/assets/ditto.webp" alt="Ditto" width="130" height="180">
                         </article>
                     </div>
                 </section>
@@ -69,7 +74,7 @@
                             <h2>Mossa della Conchiglia</h2>
                             <p>Price: $72.53</p>
                         </div>
-                        <img src="assets/mossa.png" alt="Mossa" width="140" height="190">
+                        <img src="/assets/mossa.png" alt="Mossa" width="140" height="190">
                     </article>
                 </section>
             </div>

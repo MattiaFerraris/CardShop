@@ -5,8 +5,6 @@ body {
     background-color: #f8f8f8;
 }
 
-
-
 .form-container {
     background-color: #fff;
     padding: 30px;
@@ -33,6 +31,15 @@ body {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
+.form-container select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
 .form-container button {
     padding: 10px 15px;
     background-color: #6600ff;

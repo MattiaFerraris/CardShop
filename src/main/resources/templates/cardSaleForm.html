@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert New Card</title>
+    <link rel="stylesheet" href="/css/mainPage.css">
+    <link rel="stylesheet" href="/css/cardSaleForm.css">
+</head>
+<body>
+    <header>
+        <div>
+            <img src="/assets/logo.png" alt="Logo" width="100" height="100">
+            <h1>POKEMON, MAGIC AND MUCH MORE!</h1>
+        </div>
+        <button>
+            <a href="/login.html">LOGIN</a>
+
+        </button>
+    </header>
+    <nav>
+        <a href="/" >Home</a>
+        <a href="/card/new" class="active">Sell</a>
+    </nav>
+    
+    <div class="form-container">
+        <h2>Insert New Card</h2>
+        <form action="/card/new" method="post">
+            <label for="name">Card Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="game">Game:</label>
+            <select id="game" name="game" required>
+                <option value="POKEMON">Pokèmon</option>
+                <option value="MAGIC">Magic: The Gathering</option>
+                <option value="YUGIOH">Yu-Gi-Oh!</option>
+            </select>
+
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+
+            <label for="date">Date of Insertion:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="condition">Condition:</label>
+            <select id="condition" name="condition" required>
+                <option value="MINT">Mint</option>
+                <option value="NEAR_MINT">Near Mint</option>
+                <option value="EXCELLENT">Excellent</option>
+                <option value="GOOD">Good</option>
+                <option value="LIGHT_PLAYED">Light Played</option>
+                <option value="PLAYED">Played</option>
+                <option value="POOR">Poor</option>
+
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
