@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Edit Card</title>
   <link rel="stylesheet" href="/css/mainPage.css">
+  <link rel="stylesheet" href="/css/editCard.css">
 </head>
 <body>
 <header>
@@ -13,51 +14,52 @@
   </div>
   <button>
     <a href="/login.html">LOGIN</a>
-
   </button>
 </header>
 <nav>
   <a href="/" >Home</a>
-  <a href="/card/new" class="active">Sell</a>
+  <a href="/card/new">Sell</a>
 </nav>
 <h1>Edit Card</h1>
-<form th:action="@{/card/{id}/edit(id=${card.id})}" th:object="${card}" method="post">
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" th:value="${card.name}" required>
+<div class="form-container">
+  <form th:action="@{/card/{id}/edit(id=${card.id})}" th:object="${card}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:value="${card.name}" required>
 
-  <label for="game">Game:</label>
-  <select id="game" name="game" required>
-    <option value="POKEMON">Pokèmon</option>
-    <option value="MAGIC">Magic: The Gathering</option>
-  </select>
+    <label for="game">Game:</label>
+    <select id="game" name="game" required>
+      <option value="POKEMON">Pokèmon</option>
+      <option value="MAGIC">Magic: The Gathering</option>
+    </select>
 
-  <label for="description">Description:</label>
-  <textarea id="description" name="description" th:text="${card.description}" required></textarea>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" th:text="${card.description}" required></textarea>
 
-  <label for="date">Date:</label>
-  <input type="date" id="date" name="date" th:value="${card.date}" required>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" th:value="${card.date}" required>
 
-  <label for="author">Author:</label>
-  <input type="text" id="author" name="author" th:value="${card.author}" required>
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author" th:value="${card.author}" required>
 
-  <label for="condition">Condition:</label>
-  <select id="condition" name="condition" required>
-    <option value="MINT">Mint</option>
-    <option value="NEAR_MINT">Near Mint</option>
-    <option value="EXCELLENT">Excellent</option>
-    <option value="GOOD">Good</option>
-    <option value="LIGHT_PLAYED">Light Played</option>
-    <option value="PLAYED">Played</option>
-    <option value="POOR">Poor</option>
-  </select>
+    <label for="condition">Condition:</label>
+    <select id="condition" name="condition" required>
+      <option value="MINT">Mint</option>
+      <option value="NEAR_MINT">Near Mint</option>
+      <option value="EXCELLENT">Excellent</option>
+      <option value="GOOD">Good</option>
+      <option value="LIGHT_PLAYED">Light Played</option>
+      <option value="PLAYED">Played</option>
+      <option value="POOR">Poor</option>
+    </select>
 
-  <label for="imageUrl">Image URL:</label>
-  <input type="text" id="imageUrl" name="imageUrl" th:value="${card.imageUrl}" required>
+    <label for="imageUrl">Image URL:</label>
+    <input type="text" id="imageUrl" name="imageUrl" th:value="${card.imageUrl}" required>
 
-  <label for="price">Price:</label>
-  <input type="number" id="price" name="price" step="0.01" th:value="${card.price}" required>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" step="0.01" th:value="${card.price}" required>
 
-  <button type="submit">Submit</button>
-</form>
+    <button type="submit">Submit</button>
+  </form>
+</div>
 </body>
 </html>
