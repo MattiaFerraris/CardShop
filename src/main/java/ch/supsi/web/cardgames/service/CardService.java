@@ -28,16 +28,16 @@ public class CardService {
             cardList.remove(del);
     }
 
-    public Card updateCard(Card card){
-        Card cardRsc=getCardById(card.getId());
-        if(cardRsc==null)
-            return null;
-        cardRsc.setName(card.getName());
-        cardRsc.setDescription(card.getDescription());
-        cardRsc.setAuthor(card.getAuthor());
-        cardRsc.setCondition(card.getCondition());
-        cardRsc.setType(card.getType());
-        cardRsc.setDate(card.getDate());
-        return cardRsc;
+    public void updateCard(Card card){
+        Card update=getCardById(card.getId());
+        if(update==null)
+            return;
+        update.setName(card.getName());
+        update.setGame(card.getGame());
+        update.setDescription(card.getDescription());
+        update.setImageUrl(card.getImageUrl());
+        update.setDate(card.getDate());
+        update.setAuthor(card.getAuthor());
+        update.setCondition(card.getCondition());
     }
 }
