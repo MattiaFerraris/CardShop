@@ -31,24 +31,24 @@
                 <section>
                     <h2>Pòkemon cards:</h2>
                     <div class="card-container">
-                        <article th:each="${card : cards}" class="POKEMON">
+                        <article th:each="card : ${cards}" th:if="${card.game == 'POKEMON'}" class="cardPokemon">
                             <div>
-                                <h2>Charizard Holo</h2>
-                                <p>Price: $100</p>
+                                <h2 th:text="${card.name}">Card Name</h2>
+                                <p>Price: <span th:text="${card.price}">0.00</span> $</p>
                             </div>
-                            <img src="/assets/charizard.jpg" alt="Charizard" width="130" height="180">
+                            <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
                         </article>
                     </div>
                 </section>
                 <section>
                 <h2>Magic cards:</h2>
                 <div class="card-container">
-                    <article class="cardMagic">
+                    <article th:each="card : ${cards}" th:if="${card.game == 'MAGIC'}" class="cardMagic">
                         <div>
-                            <h2>Mossa della Conchiglia</h2>
-                            <p>Price: $72.53</p>
+                            <h2 th:text="${card.name}">Card Name</h2>
+                            <p>Price: <span th:text="${card.price}">0.00</span> $</p>
                         </div>
-                        <img src="/assets/mossa.png" alt="Mossa" width="140" height="190">
+                        <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
                     </article>
                 </section>
             </div>
