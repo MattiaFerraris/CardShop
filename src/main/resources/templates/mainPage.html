@@ -36,7 +36,9 @@
                                 <h2 th:text="${card.name}">Card Name</h2>
                                 <p>Price: <span th:text="${card.price}">0.00</span> $</p>
                             </div>
-                            <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
+                            <a th:href="@{/card/{id}(id=${card.id})}">
+                                <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
+                            </a>
                         </article>
                     </div>
                 </section>
@@ -48,7 +50,9 @@
                             <h2 th:text="${card.name}">Card Name</h2>
                             <p>Price: <span th:text="${card.price}">0.00</span> $</p>
                         </div>
-                        <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
+                        <a th:href="@{/card/{id}(id=${card.id})}">
+                            <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
+                        </a>
                     </article>
                 </section>
             </div>

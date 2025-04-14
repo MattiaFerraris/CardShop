@@ -13,7 +13,7 @@ public class Card {
     private String name;
 
     private CardGame game;
-    private String desciption;
+    private String description;
     private String imageUrl;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;

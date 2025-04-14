@@ -13,4 +13,12 @@ public class CardService {
     public void addCardList(Card card) {
         this.cardList.add(card);
     }
+
+    public Card getCardById(int id) {
+        for (Card card : cardList)
+            if(card.getId() == id)
+                return card;
+
+        return null;
+    }
 }
