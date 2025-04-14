@@ -11,6 +11,7 @@ public class CardService {
     List<Card> cardList = new ArrayList<>();
 
     public void addCardList(Card card) {
+        card.setId(cardList.size());
         this.cardList.add(card);
     }
 

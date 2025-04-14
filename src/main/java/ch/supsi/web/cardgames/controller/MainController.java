@@ -19,7 +19,6 @@ public class MainController {
         return "mainPage";
     }
 
-
     @GetMapping("/card/new")
     public String newCard(){
         return "cardSaleForm";
@@ -37,7 +36,7 @@ public class MainController {
         if(card==null)
             return "redirect:/";
         model.addAttribute("card",card);
-        return "Card";
+        return "card";
     }
 
 

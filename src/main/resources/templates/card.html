@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mainPage.css">
+
+    <link rel="stylesheet" href="/css/pokemonCard.css">
+
+    <title>Pokemon Card</title>
+</head>
+<body>
+<header>
+    <div>
+        <img src="/assets/logo.png" alt="Logo" width="100" height="100">
+        <h1>POKÉMON, MAGIC AND MUCH MORE!</h1>
+    </div>
+    <button>
+        <a href="login.html">LOGIN</a>
+    </button>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/card/new">Sell</a>
+</nav>
+
+    <div class="card">
+        <h1 th:text="${card.name}">Card Name</h1>
+        <p th:text="'Game: ' + ${card.game}">Game</p>
+        <p th:text="'Description: ' + ${card.description}">Type</p>
+        <p th:text="'Author: ' + ${card.author}">Author</p>
+        <p th:text="'Price: $' + ${card.price}">Price</p>
+        <p th:text="'Condition: ' + ${card.condition}">Price</p>
+        <img th:src="@{${card.imageUrl}}" th:alt="${card.name}"  width="130" height="400">
+    </div>
+</body>
+</html>

@@ -51,15 +51,17 @@
                             <p>Price: <span th:text="${card.price}">0.00</span> $</p>
                         </div>
                         <a th:href="@{/card/{id}(id=${card.id})}">
-                            <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
+                            <img th:src="@{${card.imageUrl}}" th:alt="${card.name}"  width="130" height="180">
                         </a>
                     </article>
+                </div>
                 </section>
             </div>
             <aside>
                 <h2>NEWS</h2>
                 <p>Stay updated with the latest news on Pokemon and Magic the Gathering!</p>
             </aside>
+
         </div>
         <footer>
             <p>Card Store Ferraris Mattia &copy; 2025</p>
