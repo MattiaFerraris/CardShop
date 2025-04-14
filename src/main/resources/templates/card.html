@@ -33,6 +33,8 @@
         <p th:text="'Price: $' + ${card.price}">Price</p>
         <p th:text="'Condition: ' + ${card.condition}">Price</p>
         <img th:src="@{${card.imageUrl}}" th:alt="${card.name}"  width="130" height="400">
+        <a id="update" th:href="@{'/card/' + ${card.id} + '/edit'}">UPDATE</a>
+        <a id="delete" th:href="@{'/card/' + ${card.id} + '/delete'}">DELETE</a>
     </div>
 </body>
 </html>

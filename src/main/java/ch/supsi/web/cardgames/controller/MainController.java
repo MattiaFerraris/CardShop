@@ -1,10 +1,11 @@
 package ch.supsi.web.cardgames.controller;
-
 import ch.supsi.web.cardgames.Model.Card;
+import ch.supsi.web.cardgames.Model.User;
 import ch.supsi.web.cardgames.service.CardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -37,6 +38,33 @@ public class MainController {
             return "redirect:/";
         model.addAttribute("card",card);
         return "card";
+    }
+
+    @GetMapping("/register")
+    public String registerForm(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
+    @GetMapping("/card/{id}/edit")
+    public String editCard(@PathVariable int id, Model model) {
+        Card card = cardService.getCardById(id);
+        if(card==null)
+            return "redirect:/";
+        model.addAttribute("card", card);
+        return "editCard";
+    }
+
+    @GetMapping("/card/{id}/delete")
+    public String deleteCard(@PathVariable int id, Model model) {
+        cardService.deleteCard(id);
+        return "redirect:/";
+    }
+
+    @PostMapping("/card/{id}/edit")
+    public String updateCard(@PathVariable int id, @ModelAttribute Card card) {
+        cardService.updateCard(card);
+        return "redirect:/";
     }
 
 
