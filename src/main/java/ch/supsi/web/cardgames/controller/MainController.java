@@ -7,6 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,25 +17,22 @@ public class MainController {
     MainPageService mainService = new MainPageService();
     CardService cardService = new CardService();
 
-    @GetMapping("/api")
-    public ResponseEntity<String> getIndex(){
-        return ResponseEntity.ok()
-                .contentType(MediaType.TEXT_HTML)
-                .body(this.mainService.getHomePage(cardService.getCardList()));
+    @GetMapping("/")
+    public String getIndex(Model  model){
+        model.addAttribute("cards", cardService.getCardList());
+        return "mainPage";
     }
 
 
-    @GetMapping("/api/card/new")
-    public ResponseEntity<Resource> newCard(){
-        return ResponseEntity.ok()
-                .contentType(MediaType.TEXT_HTML)
-                .body(this.mainService.getNewCard());
+    @GetMapping("/card/new")
+    public String newCard(){
+        return "cardSaleForm";
     }
 
-    @PostMapping("/api/card/new")
+    @PostMapping("/card/new")
     public String createCard(Card card) {
         this.cardService.addCardList(card);
-        return "redirect:/api";
+        return "redirect:/";
     }
 
 
