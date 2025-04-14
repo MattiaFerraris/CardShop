@@ -8,6 +8,8 @@ import java.util.Date;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @ToString
 public class Card {
 
+    private int Id;
+
     private String name;
 
     private CardGame game;
@@ -19,4 +21,5 @@ public class Card {
     private String author;
 
     private Condition condition;
+    private double price;
 }

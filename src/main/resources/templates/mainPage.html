@@ -31,7 +31,7 @@
                 <section>
                     <h2>Pòkemon cards:</h2>
                     <div class="card-container">
-                        <article th:each="card : ${cards}" th:if="${card.game == 'POKEMON'}" class="cardPokemon">
+                        <article th:each="card : ${cards}" th:if="${card.game.toString() == 'POKEMON'}" class="cardPokemon">
                             <div>
                                 <h2 th:text="${card.name}">Card Name</h2>
                                 <p>Price: <span th:text="${card.price}">0.00</span> $</p>
@@ -43,7 +43,7 @@
                 <section>
                 <h2>Magic cards:</h2>
                 <div class="card-container">
-                    <article th:each="card : ${cards}" th:if="${card.game == 'MAGIC'}" class="cardMagic">
+                    <article th:each="card : ${cards}" th:if="${card.game.toString() == 'MAGIC'}" class="cardMagic">
                         <div>
                             <h2 th:text="${card.name}">Card Name</h2>
                             <p>Price: <span th:text="${card.price}">0.00</span> $</p>
