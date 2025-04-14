@@ -14,7 +14,7 @@ public class Card {
 
     private CardGame game;
     private String desciption;
-
+    private String imageUrl;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
 
