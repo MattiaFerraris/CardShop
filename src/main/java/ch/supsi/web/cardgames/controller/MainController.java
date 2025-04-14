@@ -31,7 +31,7 @@ public class MainController {
         return "redirect:/";
     }
 
-    @GetMapping("card/{id}")
+    @GetMapping("/card/{id}")
     public String getCard(@PathVariable("id") int id, Model model){
         Card card=cardService.getCardById(id);
         if(card==null)
