@@ -14,12 +14,11 @@ public class Card {
 
     private CardGame game;
     private String description;
-    private String imageUrl;
+    private byte[] image;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
-
     private String author;
-
     private Condition condition;
     private double price;
+
 }

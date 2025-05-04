@@ -1,7 +1,16 @@
-body {
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto; /* header - nav - contenuto - footer */
     font-family: Arial, sans-serif;
+}
+
+body > header,
+body > footer,
+body > .page-container {
+    width: 100%;
 }
 
 
@@ -10,6 +19,7 @@ header {
     font-size: 20px;
     padding: 2px;
     font-weight: bold;
+    grid-row: 1;
     display: flex;
     justify-content: space-between;
     background-color: cadetblue;
@@ -57,6 +67,7 @@ header button:active{
 nav {
     display: flex;
     justify-content: center;
+    grid-row: 2;
     background-image: url("../assets/titleBack.png");
     padding: 10px;
     border-bottom: 2px solid #000000;
@@ -69,7 +80,7 @@ nav a {
     font-size: 20px;
     font-weight: bold;
     background: black;
-    width: 55px;
+    width: max-content;
     text-align: center;
 }
 
@@ -86,6 +97,7 @@ nav a:hover {
 
 .page-container {
     display: flex;
+    grid-row: 3;
     justify-content: space-between;
     background-color: #f8f8f8;
     margin: 0;
@@ -175,12 +187,12 @@ aside {
     color: cadetblue;
 }
 
-footer{
+footer {
     background-color: cadetblue;
     color: #fff;
     text-align: center;
     padding: 10px;
-    margin-top: 10px;
+    grid-row: 4;
 }
 
 

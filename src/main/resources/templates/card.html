@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/mainPage.css">
     <link rel="stylesheet" href="/css/pokemonCard.css">
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet">
 
     <title>Pokemon Card</title>
 </head>
@@ -31,9 +32,12 @@
         <p th:text="'Author: ' + ${card.author}">Author</p>
         <p th:text="'Price: $' + ${card.price}">Price</p>
         <p th:text="'Condition: ' + ${card.condition}">Price</p>
-        <img th:src="@{${card.imageUrl}}" th:alt="${card.name}"  width="130" height="400">
+        <img th:src="@{${card.image}}" th:alt="${card.name}"  width="130" height="400">
         <a id="update" th:href="@{'/card/' + ${card.id} + '/edit'}">UPDATE</a>
         <a id="delete" th:href="@{'/card/' + ${card.id} + '/delete'}">DELETE</a>
     </div>
+<footer>
+    <p>Card Store Ferraris Mattia &copy; 2025</p>
+</footer>
 </body>
 </html>

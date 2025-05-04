@@ -35,7 +35,7 @@ public class CardService {
         update.setName(card.getName());
         update.setGame(card.getGame());
         update.setDescription(card.getDescription());
-        update.setImageUrl(card.getImageUrl());
+        update.setImage(card.getImage());
         update.setDate(card.getDate());
         update.setAuthor(card.getAuthor());
         update.setCondition(card.getCondition());

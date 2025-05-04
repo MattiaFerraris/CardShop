@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>CARD STORE</title>
         <link rel="stylesheet" href="/css/mainPage.css">
+        <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -37,7 +38,7 @@
                                 <p>Price: <span th:text="${card.price}">0.00</span> $</p>
                             </div>
                             <a th:href="@{/card/{id}(id=${card.id})}">
-                                <img th:src="@{${card.imageUrl}}" th:alt="${card.name}" width="130" height="180">
+                                <img th:src="@{${card.image}}" th:alt="${card.name}" width="130" height="180">
                             </a>
                         </article>
                     </div>
