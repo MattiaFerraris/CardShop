@@ -10,15 +10,8 @@
     <title>Pokemon Card</title>
 </head>
 <body>
-<header>
-    <div>
-        <img src="/assets/logo.png" alt="Logo" width="100" height="100">
-        <h1>POKÉMON, MAGIC AND MUCH MORE!</h1>
-    </div>
-    <button>
-        <a href="/register">LOGIN</a>
-    </button>
-</header>
+
+<header th:replace="fragments/common :: header"></header>
 
 <nav>
     <a href="/">Home</a>
@@ -36,8 +29,8 @@
         <a id="update" th:href="@{'/card/' + ${card.id} + '/edit'}">UPDATE</a>
         <a id="delete" th:href="@{'/card/' + ${card.id} + '/delete'}">DELETE</a>
     </div>
-<footer>
-    <p>Card Store Ferraris Mattia &copy; 2025</p>
-</footer>
+
+<footer th:replace="fragments/common :: footer"></footer>
+
 </body>
 </html>
