@@ -10,13 +10,11 @@
 </head>
 <body>
 
-<header th:replace="fragments/common :: header"></header>
+<header th:replace="fragments/header :: header"></header>
 
-<nav>
-        <a href="/">Home</a>
-        <a href="/card/new">Sell</a>
-    </nav>
-    <div class="container">
+<nav th:replace="fragments/nav :: nav"></nav>
+
+    <div class="container1">
         <h2>Create User</h2>
         <form action="/" id="userForm">
 
@@ -58,9 +56,9 @@
         </form>
 
     </div>
-    <script src="/js/checkLogin.js" defer></script>
 
-<footer th:replace="fragments/common :: footer"></footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 
+<script src="/js/checkLogin.js" defer></script>
 </body>
 </html>

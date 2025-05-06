@@ -17,11 +17,13 @@ public class MainController {
     @GetMapping("/")
     public String getIndex(Model  model){
         model.addAttribute("cards", cardService.getCardList());
+        model.addAttribute("activePage", "home");
         return "mainPage";
     }
 
     @GetMapping("/card/new")
-    public String newCard(){
+    public String newCard(Model model){
+        model.addAttribute("activePage", "sell");
         return "cardSaleForm";
     }
 
@@ -43,6 +45,7 @@ public class MainController {
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("activePage", "register");
         return "login";
     }
 

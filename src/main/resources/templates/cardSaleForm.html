@@ -9,12 +9,10 @@
 </head>
 <body>
 
-<header th:replace="fragments/common :: header"></header>
+<header th:replace="fragments/header :: header"></header>
 
-<nav>
-        <a href="/" >Home</a>
-        <a href="/card/new" class="active">Sell</a>
-    </nav>
+<nav th:replace="fragments/nav :: nav"></nav>
+
     
     <div class="form-container">
         <h2>Insert New Card</h2>
@@ -58,7 +56,7 @@
         </form>
     </div>
 
-<footer th:replace="fragments/common :: footer"></footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>

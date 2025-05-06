@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>CARD STORE</title>
-        <link rel="stylesheet" href="/css/mainPage.css">
-        <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CARD STORE</title>
+    <link rel="stylesheet" href="/css/mainPage.css">
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
 
-    <header th:replace="fragments/common :: header"></header>
+<header th:replace="fragments/header :: header"></header>
 
-    <nav>
-            <a href="/" class="active">Home</a>
-            <a href="/card/new">Sell</a>
-    </nav>
+<nav th:replace="fragments/nav :: nav"></nav>
 
-        <div class="page-container">
-            <div class="main-content">
-                <section class="welcome">
-                    <h2>WELCOME TO CARD STORE</h2>
-                    <p>Here you can find the best Pokemon and Magic the Gathering cards for sale!</p>
-                </section>
+<div class="container-fluid py-4">
+    <div class="row gx-4">
+        <!-- Main Content -->
+        <div class="col-12 col-lg-9">
+            <section class="mb-5">
+                <h2 class="mb-3">WELCOME TO CARD STORE</h2>
+                <p>Here you can find the best Pokémon and Magic the Gathering cards for sale!</p>
+            </section>
 
-                <section>
-                    <h2>Pòkemon cards:</h2>
-                    <div class="card-container">
-                        <article th:each="card : ${cards}" th:if="${card.game.toString() == 'POKEMON'}" class="cardPokemon">
-                            <div>
-                                <h2 th:text="${card.name}">Card Name</h2>
-                                <p>Price: <span th:text="${card.price}">0.00</span> $</p>
+            <!-- Pokémon Cards -->
+            <section class="mb-5">
+                <h3 class="mb-4">Pokémon Cards</h3>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                    <div class="col" th:each="card : ${cards}" th:if="${card.game.toString() == 'POKEMON'}">
+                        <div class="card h-100">
+                            <img th:src="@{'/uploads/' + ${filename}}" class="card-img-top img-fluid" alt="Card image">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${card.name}">Card Name</h5>
+                                <p class="card-text">Price: <span th:text="${card.price}">0.00</span> $</p>
+                                <a th:href="@{/card/{id}(id=${card.id})}" class="btn btn-primary">Details</a>
                             </div>
-                            <a th:href="@{/card/{id}(id=${card.id})}">
-                                <img th:src="@{'/uploads/' + ${filename}}" alt="Immagine caricata">
-                            </a>
-                        </article>
-                    </div>
-                </section>
-                <section>
-                <h2>Magic cards:</h2>
-                <div class="card-container">
-                    <article th:each="card : ${cards}" th:if="${card.game.toString() == 'MAGIC'}" class="cardMagic">
-                        <div>
-                            <h2 th:text="${card.name}">Card Name</h2>
-                            <p>Price: <span th:text="${card.price}">0.00</span> $</p>
                         </div>
-                        <a th:href="@{/card/{id}(id=${card.id})}">
-                            <img th:src="@{${card.imageUrl}}" th:alt="${card.name}"  width="130" height="180">
-                        </a>
-                    </article>
+                    </div>
                 </div>
-                </section>
-            </div>
-            <aside>
-                <h2>NEWS</h2>
-                <p>Stay updated with the latest news on Pokemon and Magic the Gathering!</p>
-            </aside>
+            </section>
+
+            <!-- Magic Cards -->
+            <section class="mb-5">
+                <h3 class="mb-4">Magic Cards</h3>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                    <div class="col" th:each="card : ${cards}" th:if="${card.game.toString() == 'MAGIC'}">
+                        <div class="card h-100">
+                            <img th:src="@{${card.imageUrl}}" class="card-img-top img-fluid" th:alt="${card.name}">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${card.name}">Card Name</h5>
+                                <p class="card-text">Price: <span th:text="${card.price}">0.00</span> $</p>
+                                <a th:href="@{/card/{id}(id=${card.id})}" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-    <footer th:replace="fragments/common :: footer"></footer>
+        <!-- Sidebar -->
+        <aside class="col-12 col-lg-3">
+            <h4>NEWS</h4>
+            <p>Stay updated with the latest news on Pokémon and Magic the Gathering!</p>
+        </aside>
+    </div>
+</div>
 
-    </body>
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
 </html>

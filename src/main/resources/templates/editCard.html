@@ -9,12 +9,10 @@
 </head>
 <body>
 
-<header th:replace="fragments/common :: header"></header>
+<header th:replace="fragments/header :: header"></header>
 
-<nav>
-  <a href="/" >Home</a>
-  <a href="/card/new">Sell</a>
-</nav>
+<nav th:replace="fragments/nav :: nav"></nav>
+
 <h1>Edit Card</h1>
 <div class="form-container">
   <form th:action="@{/card/{id}/edit(id=${card.id})}" th:object="${card}" method="post">
@@ -57,7 +55,7 @@
   </form>
 </div>
 
-<footer th:replace="fragments/common :: footer"></footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
 </html>
