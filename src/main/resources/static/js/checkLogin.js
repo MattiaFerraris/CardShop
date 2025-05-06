@@ -1,182 +1,134 @@
 const namesRegex = /^[a-zA-Z]+$/;
 const usernamePasswordRegex = /^[a-zA-Z0-9_]+$/;
 
-let isFirstNameValid = false;
-let isLastNameValid = false;
-let isUsernameValid = false;
-let isPasswordValid = false;
-let isPasswordConfirmationValid = false;
-
-// Funzione per validare il nome
-function validateFirstName() {
-    const firstName = document.getElementById('firstname').value;
-    const errorElement = document.getElementById('firstnameError');
-    const indicator = document.getElementById('firstnameIndicator');
-
-    if (indicator) {
-        indicator.classList.remove('success', 'error');
+const validationRules = [
+    {
+        id: 'firstname',
+        errorId: 'firstnameError',
+        indicatorId: 'firstnameIndicator',
+        validate: value => namesRegex.test(value),
+        errorMessage: 'First Name must contain only letters.'
+    },
+    {
+        id: 'lastname',
+        errorId: 'lastnameError',
+        indicatorId: 'lastnameIndicator',
+        validate: value => namesRegex.test(value),
+        errorMessage: 'Last Name must contain only letters.'
+    },
+    {
+        id: 'username',
+        errorId: 'usernameError',
+        indicatorId: 'usernameIndicator',
+        validate: value => usernamePasswordRegex.test(value),
+        errorMessage: 'Username must contain only letters, numbers, and underscores.'
+    },
+    {
+        id: 'password',
+        errorId: 'passwordError',
+        indicatorId: 'passwordIndicator',
+        validate: value => usernamePasswordRegex.test(value) && value.length >= 8 && value.length <= 15,
+        errorMessage: 'Password must contain only letters, numbers, underscores, and be 8-15 characters long.'
+    },
+    {
+        id: 'passwordtwo',
+        errorId: 'passwordtwoError',
+        indicatorId: 'passwordtwoIndicator',
+        validate: value => value === document.getElementById('password').value,
+        errorMessage: 'Passwords do not match.'
     }
+];
 
-    if (!namesRegex.test(firstName)) {
-        errorElement.textContent = 'First Name must contain only letters.';
-        if (indicator) {
-            indicator.classList.add('error');
-        }
-        isFirstNameValid = false;
-    } else {
+let validationState = {
+    firstname: false,
+    lastname: false,
+    username: false,
+    password: false,
+    passwordtwo: false
+};
+
+let touchedFields = {
+    firstname: false,
+    lastname: false,
+    username: false,
+    password: false,
+    passwordtwo: false
+};
+
+function validateField(field) {
+    const input = document.getElementById(field.id);
+    const errorElement = document.getElementById(field.errorId);
+    const indicator = document.getElementById(field.indicatorId);
+    const value = input.value;
+
+    // Non validare se il campo non è stato toccato o è vuoto
+    if (!touchedFields[field.id] || !value) {
         errorElement.textContent = '';
         if (indicator) {
-            indicator.classList.add('success'); 
+            indicator.classList.remove('success', 'error');
         }
-        isFirstNameValid = true;
+        validationState[field.id] = false;
+        updateSubmitButton();
+        return;
     }
-
-    bottonShow();
-}
-
-// Funzione per validare il cognome
-function validateLastName() {
-    const lastName = document.getElementById('lastname').value;
-    const errorElement = document.getElementById('lastnameError');
-    const indicator = document.getElementById('lastnameIndicator');
 
     if (indicator) {
         indicator.classList.remove('success', 'error');
     }
 
-    if (!namesRegex.test(lastName)) {
-        errorElement.textContent = 'Last Name must contain only letters.';
-        if (indicator) {
-            indicator.classList.add('error');
-        }
-        isLastNameValid = false;
-    } else {
+    if (field.validate(value)) {
         errorElement.textContent = '';
         if (indicator) {
             indicator.classList.add('success');
         }
-        isLastNameValid = true;
-    }
-
-    bottonShow();
-}
-
-// Funzione per validare lo username
-function validateUsername() {
-    const username = document.getElementById('username').value;
-    const errorElement = document.getElementById('usernameError');
-    const indicator = document.getElementById('usernameIndicator');
-
-    if (indicator) {
-        indicator.classList.remove('success', 'error');
-    }
-
-    if (!usernamePasswordRegex.test(username)) {
-        errorElement.textContent = 'Username must contain only letters, numbers, and underscores.';
-        if (indicator) {
-            indicator.classList.add('error'); // Rosso per errore
-        }
-        isUsernameValid = false;
+        validationState[field.id] = true;
     } else {
-        errorElement.textContent = '';
+        errorElement.textContent = field.errorMessage;
         if (indicator) {
-            indicator.classList.add('success'); // Verde per successo
+            indicator.classList.add('error');
         }
-        isUsernameValid = true;
+        validationState[field.id] = false;
     }
 
-    bottonShow(); // Aggiorna lo stato del pulsante
+    updateSubmitButton();
 }
 
-// Funzione per validare la password
-function validatePassword() {
-    const password = document.getElementById('password').value;
-    const errorElement = document.getElementById('passwordError');
-    const indicator = document.getElementById('passwordIndicator');
+function updateSubmitButton() {
+    const submitButton = document.getElementById('submit');
+    const isFormValid = Object.values(validationState).every(state => state) &&
+        Object.values(touchedFields).every(touched => touched);
 
-    if (indicator) {
-        indicator.classList.remove('success', 'error');
+    if (submitButton) {
+        submitButton.disabled = !isFormValid;
+        submitButton.classList.toggle('disabled', !isFormValid);
     }
-
-    if (!usernamePasswordRegex.test(password) || password.length < 8 || password.length > 15) {
-        errorElement.textContent = 'Password must contain only letters, numbers, underscores, and be 8-15 characters long.';
-        if (indicator) {
-            indicator.classList.add('error'); // Rosso per errore
-        }
-        isPasswordValid = false;
-    } else {
-        errorElement.textContent = '';
-        if (indicator) {
-            indicator.classList.add('success'); // Verde per successo
-        }
-        isPasswordValid = true;
-    }
-
-    bottonShow(); // Aggiorna lo stato del pulsante
 }
 
-// Funzione per validare la conferma della password
-function validatePasswordConfirmation() {
-    const password = document.getElementById('password').value;
-    const passwordCheck = document.getElementById('passwordtwo').value;
-    const errorElement = document.getElementById('passwordtwoError');
-    const indicator = document.getElementById('passwordtwoIndicator');
-
-    if (indicator) {
-        indicator.classList.remove('success', 'error');
-    }
-
-    if (passwordCheck !== password) {
-        errorElement.textContent = 'Passwords do not match.';
-        if (indicator) {
-            indicator.classList.add('error'); // Rosso per errore
-        }
-        isPasswordConfirmationValid = false;
-    } else {
-        errorElement.textContent = '';
-        if (indicator) {
-            indicator.classList.add('success'); // Verde per successo
-        }
-        isPasswordConfirmationValid = true;
-    }
-
-    bottonShow(); // Aggiorna lo stato del pulsante
-}
-
-// Funzione per aggiornare lo stato del pulsante
-function bottonShow() {
-    const form = document.getElementById('userForm');
-    const existingButton = document.getElementById('submit');
-
-    if (isFirstNameValid &&
-        isLastNameValid &&
-        isUsernameValid &&
-        isPasswordValid &&
-        isPasswordConfirmationValid) {
-        if (!existingButton) {
-            const submitButton = document.createElement('button');
-            submitButton.id = 'submit';
-            submitButton.type = 'submit';
-            submitButton.className = 'button Clickable';
-            submitButton.textContent = 'Create Account';
-
-            submitButton.addEventListener("click", function (event) {
-                event.preventDefault();
-                alert("Account creation in progress");
+document.addEventListener('DOMContentLoaded', () => {
+    validationRules.forEach(field => {
+        const input = document.getElementById(field.id);
+        if (input) {
+            // Valida solo dopo che l'utente inizia a scrivere
+            input.addEventListener('input', () => {
+                touchedFields[field.id] = true;
+                validateField(field);
             });
+            // Valida anche quando il campo perde il focus
+            input.addEventListener('blur', () => {
+                touchedFields[field.id] = true;
+                validateField(field);
+            });
+        }
+    });
 
-            form.appendChild(submitButton);
-        }
-    } else {
-        if (existingButton) {
-            form.removeChild(existingButton);
-        }
+    const form = document.getElementById('userForm');
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            const isFormValid = Object.values(validationState).every(state => state);
+            if (!isFormValid) {
+                event.preventDefault();
+                alert('Please fix all errors before submitting.');
+            }
+        });
     }
-}
-
-// Listener per la validazione in tempo reale
-document.getElementById('firstname').addEventListener('input', validateFirstName);
-document.getElementById('lastname').addEventListener('input', validateLastName);
-document.getElementById('username').addEventListener('input', validateUsername);
-document.getElementById('password').addEventListener('input', validatePassword);
-document.getElementById('passwordtwo').addEventListener('input', validatePasswordConfirmation);
+});

@@ -49,6 +49,11 @@ public class MainController {
         return "login";
     }
 
+    @PostMapping("/register")
+    public String sendForm(Model model) {
+        return "redirect:/";
+    }
+
     @GetMapping("/card/{id}/edit")
     public String editCard(@PathVariable int id, Model model) {
         Card card = cardService.getCardById(id);
