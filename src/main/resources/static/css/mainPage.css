@@ -66,19 +66,20 @@ header button:active{
 nav {
     grid-row: 2;
     background-image: url("../assets/titleBack.png");
-    border: 2px solid #000000;
 }
 
 .nav-item {
-    background: #0056b3;
-    border: 1px solid #fff;
+    background: lightgray;
+    border-radius: 10px;
 }
 
 .nav-item.active .nav-link {
-    background-color: #fff;
+    background-color: grey;
     color: #000;
-    border: 1px solid #0056b3;
+    border-radius: 10px;
+
 }
+
 
 .page-container {
     display: flex;
