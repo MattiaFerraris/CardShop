@@ -16,17 +16,29 @@
 <nav th:replace="fragments/nav :: nav"></nav>
 
 
-    <div class="card">
-        <h1 th:text="${card.name}">Card Name</h1>
-        <p th:text="'Game: ' + ${card.game}">Game</p>
-        <p th:text="'Description: ' + ${card.description}">Type</p>
-        <p th:text="'Author: ' + ${card.author}">Author</p>
-        <p th:text="'Price: $' + ${card.price}">Price</p>
-        <p th:text="'Condition: ' + ${card.condition}">Price</p>
-        <img th:src="@{${card.image}}" th:alt="${card.name}"  width="130" height="400">
-        <a id="update" th:href="@{'/card/' + ${card.id} + '/edit'}">UPDATE</a>
-        <a id="delete" th:href="@{'/card/' + ${card.id} + '/delete'}">DELETE</a>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4" th:text="${card.name}">Card Name</h2>
+                    <p class="card-text"><strong>Game:</strong> <span th:text="${card.game}">Game</span></p>
+                    <p class="card-text"><strong>Description:</strong> <span th:text="${card.description}">Description</span></p>
+                    <p class="card-text"><strong>Author:</strong> <span th:text="${card.author}">Author</span></p>
+                    <p class="card-text"><strong>Price:</strong> $<span th:text="${card.price}">Price</span></p>
+                    <p class="card-text"><strong>Condition:</strong> <span th:text="${card.condition}">Condition</span></p>
+
+                    <img th:src="@{${card.image}}" class="img-fluid mb-3" th:alt="${card.name}">
+
+                    <div class="d-flex justify-content-between">
+                        <a id="update" th:href="@{'/card/' + ${card.id} + '/edit'}" class="btn btn-warning">Update</a>
+                        <a id="delete" th:href="@{'/card/' + ${card.id} + '/delete'}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 <footer th:replace="fragments/footer :: footer"></footer>
 
