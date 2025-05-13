@@ -9,12 +9,13 @@
 </head>
 <body>
 
-<header th:replace="fragments/header :: header"></header>
 
-<nav th:replace="fragments/nav :: nav"></nav>
+<header th:replace="~{fragments/header :: header}"></header>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
+
 
 <div class="container-fluid py-4">
-    <div class="row gx-4">
+    <div class="row gx-4 align-items-start">
         <!-- Main Content -->
         <div class="col-12 col-lg-9">
             <section class="mb-5">
@@ -25,13 +26,14 @@
             <!-- Pokémon Cards -->
             <section class="mb-5">
                 <h3 class="mb-4">Pokémon Cards</h3>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-4">
                     <div class="col" th:each="card : ${cards}" th:if="${card.game.toString() == 'POKEMON'}">
                         <div class="card h-100">
-                            <img th:src="@{'/uploads/' + ${images}}" class="card-img-top img-fluid" alt="Card image">
+                            <img th:src="@{/card/image/{id}(id=${card.id})}" class="card-img-top img-fluid" alt="Card image">
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${card.name}">Card Name</h5>
                                 <p class="card-text">Price: <span th:text="${card.price}">0.00</span> $</p>
+                                <p class="card-text">Condition: <span th:text="${card.cardCondition}"></span> </p>
                                 <a th:href="@{/card/{id}(id=${card.id})}" class="btn btn-primary">Details</a>
                             </div>
                         </div>
@@ -42,10 +44,10 @@
             <!-- Magic Cards -->
             <section class="mb-5">
                 <h3 class="mb-4">Magic Cards</h3>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-4">
                     <div class="col" th:each="card : ${cards}" th:if="${card.game.toString() == 'MAGIC'}">
                         <div class="card h-100">
-                            <img th:src="@{'/uploads/' + ${images}}" class="card-img-top img-fluid" alt="Card image">
+                            <img th:src="@{/card/image/{id}(id=${card.id})}" class="card-img-top img-fluid" alt="Card image">
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${card.name}">Card Name</h5>
                                 <p class="card-text">Price: <span th:text="${card.price}">0.00</span> $</p>
@@ -65,7 +67,7 @@
     </div>
 </div>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>

@@ -65,27 +65,29 @@ function validateField(field) {
     if (!touchedFields[field.id] || !value) {
         errorElement.textContent = '';
         if (indicator) {
-            indicator.classList.remove('success', 'error');
+            indicator.classList.remove('is-valid', 'is-invalid');
         }
         validationState[field.id] = false;
         updateSubmitButton();
         return;
     }
 
+    // Rimuovi gli stili precedenti
     if (indicator) {
-        indicator.classList.remove('success', 'error');
+        indicator.classList.remove('is-valid', 'is-invalid');
     }
 
+    // Validazione del campo
     if (field.validate(value)) {
         errorElement.textContent = '';
         if (indicator) {
-            indicator.classList.add('success');
+            indicator.classList.add('is-valid');
         }
         validationState[field.id] = true;
     } else {
         errorElement.textContent = field.errorMessage;
         if (indicator) {
-            indicator.classList.add('error');
+            indicator.classList.add('is-invalid');
         }
         validationState[field.id] = false;
     }

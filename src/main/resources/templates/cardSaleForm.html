@@ -50,8 +50,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="condition" class="form-label">Condition</label>
-                            <select id="condition" name="condition" class="form-select" required>
+                            <label for="cardCondition" class="form-label">Condition</label>
+                            <select id="cardCondition" name="cardCondition" class="form-select" required>
                                 <option value="MINT">Mint</option>
                                 <option value="NEAR_MINT">Near Mint</option>
                                 <option value="EXCELLENT">Excellent</option>
@@ -64,12 +64,12 @@
 
                         <div class="mb-3">
                             <label for="price" class="form-label">Price</label>
-                            <input type="text" id="price" name="price" class="form-control" required>
+                            <input type="number" id="price" name="price" class="form-control" step="0.01" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="file" id="image" name="image" class="form-control">
+                            <input type="file" id="image" name="imageFile" class="form-control">
                         </div>
 
                         <div class="d-grid">
