@@ -9,8 +9,8 @@
     <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
-<header th:replace="fragments/header :: header"></header>
-<nav th:replace="fragments/nav :: nav"></nav>
+<header th:replace="~{fragments/header :: header}"></header>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<header th:replace="~{fragments/footer :: footer}"></header>
 
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 <script src="/js/checkLogin.js" defer></script>

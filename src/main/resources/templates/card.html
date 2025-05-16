@@ -13,7 +13,7 @@
 
 <header th:replace="~{fragments/header :: header}"></header>
 
-<nav th:replace="fragments/nav :: nav"></nav>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
 
 
 <div class="container py-5">
@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<header th:replace="~{fragments/footer :: footer}"></header>
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
