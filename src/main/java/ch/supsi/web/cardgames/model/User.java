@@ -1,9 +1,6 @@
 package ch.supsi.web.cardgames.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.id.factory.internal.AutoGenerationTypeStrategy;
@@ -22,8 +19,8 @@ public class User {
 
     private String username;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     private String password;
-
-    private String passwordConfirm;
-
 }
