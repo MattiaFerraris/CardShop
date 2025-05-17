@@ -1,39 +1,39 @@
-const namesRegex = /^[a-zA-Z]+$/;
-const usernamePasswordRegex = /^[a-zA-Z0-9_]+$/;
+const namesRegex = /^[a-zA-Z\s'-]{2,50}$/;
+const usernamePasswordRegex = /^(?=.*[a-zA-Z0-9])[a-zA-Z0-9_]{3,30}$/;
 
 const validationRules = [
     {
         id: 'firstname',
         errorId: 'firstnameError',
-        indicatorId: 'firstnameIndicator',
         validate: value => namesRegex.test(value),
-        errorMessage: 'First Name must contain only letters.'
+        errorMessage: 'First Name must contain only letters, spaces, hyphens, or apostrophes (2-50 characters).'
     },
     {
         id: 'lastname',
         errorId: 'lastnameError',
-        indicatorId: 'lastnameIndicator',
         validate: value => namesRegex.test(value),
-        errorMessage: 'Last Name must contain only letters.'
+        errorMessage: 'Last Name must contain only letters, spaces, hyphens, or apostrophes (2-50 characters).'
     },
     {
         id: 'username',
         errorId: 'usernameError',
-        indicatorId: 'usernameIndicator',
         validate: value => usernamePasswordRegex.test(value),
-        errorMessage: 'Username must contain only letters, numbers, and underscores.'
+        errorMessage: 'Username must contain letters, numbers, or underscores (3-30 characters).'
     },
     {
         id: 'password',
         errorId: 'passwordError',
-        indicatorId: 'passwordIndicator',
-        validate: value => usernamePasswordRegex.test(value) && value.length >= 8 && value.length <= 15,
-        errorMessage: 'Password must contain only letters, numbers, underscores, and be 8-15 characters long.'
+        validate: value => usernamePasswordRegex.test(value) &&
+            value.length >= 8 &&
+            value.length <= 15 &&
+            /[A-Z]/.test(value) &&
+            /[a-z]/.test(value) &&
+            /[0-9]/.test(value),
+        errorMessage: 'Password must be 8-15 characters, with at least one uppercase, lowercase, number, and only letters, numbers, underscores.'
     },
     {
         id: 'passwordtwo',
         errorId: 'passwordtwoError',
-        indicatorId: 'passwordtwoIndicator',
         validate: value => value === document.getElementById('password').value,
         errorMessage: 'Passwords do not match.'
     }
@@ -58,37 +58,46 @@ let touchedFields = {
 function validateField(field) {
     const input = document.getElementById(field.id);
     const errorElement = document.getElementById(field.errorId);
-    const indicator = document.getElementById(field.indicatorId);
     const value = input.value;
 
-    // Non validare se il campo non è stato toccato o è vuoto
-    if (!touchedFields[field.id] || !value) {
+    if (!input || !errorElement) {
+        console.warn(`Field or error element not found for ${field.id}`);
+        return;
+    }
+
+    if (!touchedFields[field.id]) {
         errorElement.textContent = '';
-        if (indicator) {
-            indicator.classList.remove('is-valid', 'is-invalid');
-        }
+        input.classList.remove('is-valid', 'is-invalid');
+        input.setAttribute('aria-invalid', 'false');
+        input.removeAttribute('aria-describedby');
         validationState[field.id] = false;
         updateSubmitButton();
         return;
     }
 
-    // Rimuovi gli stili precedenti
-    if (indicator) {
-        indicator.classList.remove('is-valid', 'is-invalid');
+    if (!value) {
+        errorElement.textContent = 'This field is required.';
+        input.classList.add('is-invalid');
+        input.setAttribute('aria-invalid', 'true');
+        input.setAttribute('aria-describedby', field.errorId);
+        validationState[field.id] = false;
+        updateSubmitButton();
+        return;
     }
 
-    // Validazione del campo
+    input.classList.remove('is-valid', 'is-invalid');
+
     if (field.validate(value)) {
         errorElement.textContent = '';
-        if (indicator) {
-            indicator.classList.add('is-valid');
-        }
+        input.classList.add('is-valid');
+        input.setAttribute('aria-invalid', 'false');
+        input.removeAttribute('aria-describedby');
         validationState[field.id] = true;
     } else {
         errorElement.textContent = field.errorMessage;
-        if (indicator) {
-            indicator.classList.add('is-invalid');
-        }
+        input.classList.add('is-invalid');
+        input.setAttribute('aria-invalid', 'true');
+        input.setAttribute('aria-describedby', field.errorId);
         validationState[field.id] = false;
     }
 
@@ -97,12 +106,14 @@ function validateField(field) {
 
 function updateSubmitButton() {
     const submitButton = document.getElementById('submit');
-    const isFormValid = Object.values(validationState).every(state => state) &&
-        Object.values(touchedFields).every(touched => touched);
+    const isFormValid = Object.values(validationState).every(Boolean) &&
+        Object.values(touchedFields).every(Boolean);
 
     if (submitButton) {
         submitButton.disabled = !isFormValid;
         submitButton.classList.toggle('disabled', !isFormValid);
+    } else {
+        console.warn('Submit button not found.');
     }
 }
 
@@ -110,27 +121,34 @@ document.addEventListener('DOMContentLoaded', () => {
     validationRules.forEach(field => {
         const input = document.getElementById(field.id);
         if (input) {
-            // Valida solo dopo che l'utente inizia a scrivere
             input.addEventListener('input', () => {
                 touchedFields[field.id] = true;
                 validateField(field);
+                // Re-validate passwordtwo if password changes
+                if (field.id === 'password' && touchedFields['passwordtwo']) {
+                    const passwordTwoField = validationRules.find(rule => rule.id === 'passwordtwo');
+                    validateField(passwordTwoField);
+                }
             });
-            // Valida anche quando il campo perde il focus
             input.addEventListener('blur', () => {
                 touchedFields[field.id] = true;
                 validateField(field);
             });
+        } else {
+            console.warn(`Input element not found for ${field.id}`);
         }
     });
 
     const form = document.getElementById('userForm');
     if (form) {
         form.addEventListener('submit', (event) => {
-            const isFormValid = Object.values(validationState).every(state => state);
+            const isFormValid = Object.values(validationState).every(Boolean);
             if (!isFormValid) {
                 event.preventDefault();
                 alert('Please fix all errors before submitting.');
             }
         });
+    } else {
+        console.warn('Form element with id="userForm" not found.');
     }
 });

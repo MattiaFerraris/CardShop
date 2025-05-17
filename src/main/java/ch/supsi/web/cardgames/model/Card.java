@@ -37,4 +37,7 @@ public class Card {
 
     private Double price;
 
+    @ManyToOne
+    private User owner;
+
 }

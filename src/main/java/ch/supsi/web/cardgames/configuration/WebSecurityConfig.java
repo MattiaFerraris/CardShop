@@ -36,6 +36,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/webjars/**").permitAll()
                         .requestMatchers("/fonts/**").permitAll()
+                        .requestMatchers("/assets/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();

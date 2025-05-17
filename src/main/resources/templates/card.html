@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,8 +31,8 @@
                     <img th:src="@{/card/image/{id}(id=${card.id})}"  class="img-fluid mx-auto d-block" style="max-height: 500px;" th:alt="${card.name}">
 
                     <div class="d-flex justify-content-between">
-                        <a id="update" th:href="@{'/card/' + ${card.id} + '/edit'}" class="btn btn-warning">Update</a>
-                        <a id="delete" th:href="@{'/card/' + ${card.id} + '/delete'}" class="btn btn-danger">Delete</a>
+                        <a id="update" sec:authorize="isAuthenticated()" th:href="@{'/card/' + ${card.id} + '/edit'}" class="btn btn-warning">Update</a>
+                        <a id="delete" sec:authorize="isAuthenticated()" th:href="@{'/card/' + ${card.id} + '/delete'}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             </div>

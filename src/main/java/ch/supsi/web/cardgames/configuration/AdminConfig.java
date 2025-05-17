@@ -16,11 +16,11 @@ public class AdminConfig {
                 String username = "admin";
                 String rawPassword = "admin";
 
-                if (userRepository.findByUsername(username).isEmpty()) {
+                if (userRepository.findByUsername(username) == null) {
                     User admin = new User();
                     admin.setUsername(username);
                     admin.setPassword(passwordEncoder.encode(rawPassword));
-                    admin.setRole(Role.ADMIN);
+                    admin.setRole(Role.ROLE_ADMIN);
 
                     userRepository.save(admin);
                     System.out.println("Admin user created.");

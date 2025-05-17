@@ -1,4 +1,4 @@
-<nav th:fragment="nav" class="navbar navbar-expand-lg custom-navbar">
+<nav th:fragment="nav" class="navbar navbar-expand-lg custom-navbar" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="container-fluid navbar-overlay">
         <button class="navbar-toggler bg-dark-subtle" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarContent" aria-controls="navbarContent"
@@ -11,13 +11,21 @@
                 <li class="nav-item" th:classappend="${activePage == 'home'} ? ' active'">
                     <a class="nav-link" th:href="@{/}">Home</a>
                 </li>
-                <li class="nav-item" th:classappend="${activePage == 'sell'} ? ' active'">
+                <li class="nav-item" sec:authorize="isAuthenticated()" th:classappend="${activePage == 'sell'} ? ' active'">
                     <a class="nav-link" th:href="@{/card/new}">Sell</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item" th:classappend="${activePage == 'register'} ? ' active'">
-                    <a class="nav-link" th:href="@{/register}">Sign up</a>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" th:classappend="${activePage == 'login' ? 'active' : ''}" href="/login">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" th:classappend="${activePage == 'register' ? 'active' : ''}" href="/register">Register</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form action="/logout" method="post" class="d-inline">
+                        <button type="submit" class="nav-link btn btn-link">Logout</button>
+                    </form>
                 </li>
             </ul>
         </div>
