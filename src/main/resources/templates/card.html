@@ -31,6 +31,7 @@
                     <img th:src="@{/card/image/{id}(id=${card.id})}"  class="img-fluid mx-auto d-block" style="max-height: 500px;" th:alt="${card.name}">
 
                     <div class="d-flex justify-content-between">
+                        <!--TODO mettere questi tasti utilizzabili solo dal possesore delle carte-->
                         <a id="update" sec:authorize="isAuthenticated()" th:href="@{'/card/' + ${card.id} + '/edit'}" class="btn btn-warning">Update</a>
                         <a id="delete" sec:authorize="isAuthenticated()" th:href="@{'/card/' + ${card.id} + '/delete'}" class="btn btn-danger">Delete</a>
                     </div>

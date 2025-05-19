@@ -67,7 +67,10 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(@RequestParam(value = "error", required = false) String error, Model model) {
+        if (error != null) {
+            model.addAttribute("error", "Username or password incorrect");
+        }
         return "login";
     }
 
