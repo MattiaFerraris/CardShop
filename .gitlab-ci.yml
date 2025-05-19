@@ -1,38 +1,41 @@
-stages:
-  - build
-  - test
+  stages:
+    - build
+    - test
 
-image: fedora:latest
+  image: fedora:latest
 
-services: []
+  services: []
 
-variables:
-  PODMAN_CONNECTION: unix:///run/user/1000/podman/podman.sock
+  variables:
+    PODMAN_CONNECTION: unix:///run/user/1000/podman/podman.sock
 
-build:
-  stage: build
-  before_script:
-    - dnf install -y podman qemu-user-static
-    - systemctl --user enable --now podman.socket
-    - echo $'\r' >> ./src/main/resources/application.properties
-    - echo "server.servlet.context-path=/$CI_PROJECT_NAME" >> ./src/main/resources/application.properties
-  script:
-    - podman --connection $PODMAN_CONNECTION build --platform linux/arm64/v8 -t $CI_REGISTRY_IMAGE .
-    - podman --connection $PODMAN_CONNECTION login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - podman --connection $PODMAN_CONNECTION push $CI_REGISTRY_IMAGE
-  only:
-    - main
+  build:
+    stage: build
+    before_script:
+      - dnf install -y podman qemu-user-static
+      - podman system service --time=0 unix:///run/user/1000/podman/podman.sock & # Start Podman socket in background
+      - sleep 2 # Wait for socket to be ready
+      - echo $'\r' >> ./src/main/resources/application.properties
+      - echo "server.servlet.context-path=/$CI_PROJECT_NAME" >> ./src/main/resources/application.properties
+    script:
+      - podman --connection $PODMAN_CONNECTION build --platform linux/arm64/v8 -t $CI_REGISTRY_IMAGE .
+      - podman --connection $PODMAN_CONNECTION login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+      - podman --connection $PODMAN_CONNECTION push $CI_REGISTRY_IMAGE
+    only:
+      - main
 
-test:
-  stage: test
-  before_script:
-    - dnf install -y java-17-openjdk podman curl
-    - podman --connection $PODMAN_CONNECTION pull $CI_REGISTRY_IMAGE
-  script:
-    - podman --connection $PODMAN_CONNECTION run -d -p 8080:8080 --name app $CI_REGISTRY_IMAGE
-    - sleep 10
-    - 'curl -f -X POST http://localhost:8080/login -d "username=wrong&password=wrong" | grep "Username or password incorrect"'
-    - podman --connection $PODMAN_CONNECTION stop app
-    - podman --connection $PODMAN_CONNECTION rm app
-  only:
-    - main
+  test:
+    stage: test
+    before_script:
+      - dnf install -y java-17-openjdk podman curl
+      - podman system service --time=0 unix:///run/user/1000/podman/podman.sock & # Start Podman socket in background
+      - sleep 2 # Wait for socket to be ready
+      - podman --connection $PODMAN_CONNECTION pull $CI_REGISTRY_IMAGE
+    script:
+      - podman --connection $PODMAN_CONNECTION run -d -p 8080:8080 --name app $CI_REGISTRY_IMAGE
+      - sleep 10
+      - 'curl -f -X POST http://localhost:8080/login -d "username=wrong&password=wrong" | grep "Username or password incorrect"'
+      - podman --connection $PODMAN_CONNECTION stop app
+      - podman --connection $PODMAN_CONNECTION rm app
+    only:
+      - main
