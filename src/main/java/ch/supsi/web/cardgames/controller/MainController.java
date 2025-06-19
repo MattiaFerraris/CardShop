@@ -1,25 +1,11 @@
 package ch.supsi.web.cardgames.controller;
 import ch.supsi.web.cardgames.model.Card;
-import ch.supsi.web.cardgames.model.User;
 import ch.supsi.web.cardgames.service.CardService;
-import ch.supsi.web.cardgames.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Controller
 public class MainController {

@@ -7,6 +7,7 @@ import org.hibernate.id.factory.internal.AutoGenerationTypeStrategy;
 
 @Getter @Setter
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -20,6 +21,7 @@ public class User {
     private String username;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private Role role;
 
     private String password;
